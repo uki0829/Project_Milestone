@@ -1,0 +1,5 @@
+##  progress
+
+I have laid my focus on the text generation project, and I have used a text dataset to train the model. The design of the model is based on the transformer architecture, and I created a simple character-level tokenizer to map out all the unique characters. The architecture converts all the text, after encoding, into tensors. The model starts with the embedding layers, all using PyTorch's existing modules. All the tokens, after embedding, go into the transformer block and repeat the process. At the end, the softmax function is used to get the probability for each character.
+
+What I want to do next is understand how to train the model with a larger dataset, but that might present a problem as the hardware capability is limited. At the end, I want to store the model weights and create another script that will take user input and generate something similar to it.
