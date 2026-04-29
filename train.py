@@ -2,6 +2,7 @@ import os
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
+import tiktoken as tk
 '''this is a decoder only model'''
 block_size = 256
 batch_size = 32
@@ -29,9 +30,14 @@ for fname in os.listdir("data"):
             text += f.read()
 print(len(text))
 
+# gpt2 tokenizer
+# enc = tk.get_encoding("gpt2")
+# vocab_size = enc.n_vocab
+# encode = lambda s: enc.encode(s)
+# decode = lambda l: enc.decode(l)
+
 chars = sorted(list(set(text)))
 vocab_size = len(chars)
-
 stoi = {ch:i for i,ch in enumerate(chars)}
 itos = {i:ch for i,ch in enumerate(chars)}
 encode = lambda s: [stoi[c] for c in s]
@@ -192,7 +198,7 @@ for epoch in range(max_iters):
 context = torch.zeros((1, 1), dtype=torch.long, device=device)
 print(decode(m.generate(context, max_new_tokens=1000)[0].tolist()))
 
-torch.save(m.state_dict(), "../models/model.pt")
+torch.save(m.state_dict(), "models/model.pt") # save the model parameters
 print("model saved")
 
 
